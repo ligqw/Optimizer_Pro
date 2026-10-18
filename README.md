@@ -1,45 +1,50 @@
-# 🛡️ Universal System Optimizer Pro
+# 🛡️ Universal Optimizer Pro
 
-A comprehensive, lightweight `.bat` script designed to boost your PC's performance by cleaning up clutter, disabling telemetry, and optimizing system resources. This utility features a completely redesigned, crash-proof architecture, lightning-fast Unicode logging, and a professional centered ASCII interface.
+Комплексный, безопасный и легковесный инструмент для оптимизации системы Windows. 
 
-## 🚀 How to Run
+Изначально проект представлял собой `.bat`-скрипт. Теперь он полностью переписан на **Python**, получил удобный интерфейс, защиту от сбоев и систему откатов, но при этом сохранил поддержку старых систем.
 
-1. Download the latest `Optimization.bat` file from the [Releases](https://github.com) section.
-2. Right-click on the file.
-3. Select **"Run as administrator"** (this is strictly required to apply system-level changes, manage core services, and create a system restore point).
+## 🚀 Как скачать и запустить
 
-## ⏱️ How It Works
+1. Перейдите в раздел **[Releases (Релизы)](../../releases)**.
+2. Скачайте нужный файл из последнего релиза (см. описание ниже).
+3. Запустите файл. **Программа сама запросит права администратора** (появится стандартное окно UAC — нажмите «Да»).
 
-The script safely optimizes your system through **7 key stages**, available via Full or Custom interactive menus:
+### 📦 Что скачивать?
 
-* **[1/7] System Restore Point:** Automatically creates a secure backup point before making any system modifications.
-* **[2/7] Cache Cleanup:** Safely wipes temporary folders, logs, and clears the Windows Update download cache without frozen prompt loops.
-* **[3/7] DNS Flush:** Instantly clears and rebuilds your internet DNS cache to fix or speed up network connectivity.
-* **[4/7] Power Plan Optimization:** Smart-detects hardware type. Enables the "High Performance" power scheme and unparks CPU cores on desktops, while safely bypassing laptops to save battery.
-* **[5/7] Telemetry Disabled:** Disables heavy background Windows tracking services, Xbox GameDVR overlays, and GPU tracking bloatware (NVIDIA/AMD) to free up CPU cycles.
-* **[6/7] RAM & Process Booster:** Terminates frozen "Not Responding" programs and utilizes native Win32 APIs via encoded commands to force Windows to flush and optimize active working sets memory.
-* **[7/7] System Integrity Check:** Runs native deployment diagnostics (`DISM /ScanHealth`, `DISM /RestoreHealth`, and `SFC /scannow`) with live on-screen progress percentages.
+* **`Optimizer_Pro.exe`** *(Рекомендуется)* — Готовая программа для современных систем (Windows 10/11). **Вам не нужно устанавливать Python.** Просто скачайте и запустите.
+* **`Optimizer_Pro.bat`** — Классическая скриптовая версия. Идеально подходит для старых ПК (Windows 7/8) или если `.exe` не запускается.
+* **`Optimizer_Pro.py`** — Исходный код для разработчиков (требуется установленный Python 3.x).
 
-## 🛠️ Features & Architecture Updates
+---
 
-* **Anti-Freeze Fail-safes:** Added full `setlocal enabledelayedexpansion` loops with strict variable resetting to block empty inputs and hidden terminal prompt locks.
-* **High-Speed Unicode Logs:** Ditched slow external logging dependencies. The utility writes instant, perfectly readable `optimization_log.txt` reports in native UTF-16LE with BOM formatting.
-* **Responsive Layout:** Forced crisp terminal boundaries using `mode con: cols=60 lines=22` with high-contrast aqua-teal styling (`color 0B`).
+## ✨ Ключевые возможности
 
-## 📋 System Requirements
+* **Полная или выборочная оптимизация**: Вы сами выбираете, какие этапы выполнять (Y/N).
+* **Безопасный откат (Rollback)**: Если что-то пошло не так, выберите пункт «Откатить изменения» в меню. Программа вернет стандартные настройки служб, питания и GameDVR.
+* **Замер памяти (Бенчмарк)**: Программа замеряет свободную ОЗУ *до* и *после* оптимизации, показывая, сколько мегабайт удалось освободить.
+* **Умная очистка**: Безопасно удаляет временные файлы и кэш обновлений Windows, не убивая критически важные процессы.
+* **Проверка целостности**: Встроенный запуск `SFC /scannow` и `DISM /RestoreHealth`.
+* **Отключение телеметрии**: Блокировка шпионских служб Windows, NVIDIA и AMD, а также фоновой записи GameDVR.
 
-* **Operating System:** Windows 10 / Windows 11 (64-bit).
-* **Access Rights:** Administrator account privileges.
-* **Infrastructure:** PowerShell must be enabled (installed by default).
+---
 
-## 🔄 How to Undo Changes (Rollback)
+## ⚠️ Важная информация
 
-If you want to revert your system to its original state after the optimization, use the created secure restore point:
+> **Антивирус и Браузер:** 
+> Так как программа собрана с помощью PyInstaller и запрашивает права администратора для работы с реестром, **Windows Defender или ваш браузер могут ложно срабатывать** при скачивании `.exe` файла. Это нормально для подобных утилит. Нажмите «Подробнее» -> «Выполнить в любом случае» (Keep anyway).
 
-1. Press `Win + R`, type `rstrui`, and press `Enter`.
-2. In the opened system restore wizard, select the restore point named **"BeforeOpt"**.
-3. Follow the on-screen instructions to restart and roll back your system.
+> **Точка восстановления:** 
+> Настоятельно рекомендуется в главном меню выбрать пункт **«1. Полная оптимизация»**, так как на первом этапе программа автоматически создаст точку восстановления системы на случай непредвиденных ситуаций.
 
-## ⚠️ Disclaimer
+> **Перезагрузка:** 
+> После завершения работы рекомендуется перезагрузить компьютер, чтобы все изменения в реестре и службах применились окончательно.
 
-This script is provided "as is" without any warranty. The author takes no responsibility for any system malfunctions or issues. Before running, ensure that the "System Restore" feature is enabled on your `C:\` drive so that the initial backup step can execute successfully.
+---
+
+## 🛠️ Для разработчиков
+
+Если вы хотите собрать `.exe` самостоятельно из исходного кода:
+```bash
+pip install pyinstaller
+pyinstaller --onefile --uac-admin --name Optimizer_Pro Optimizer_Pro.py
