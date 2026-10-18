@@ -1,50 +1,50 @@
 # 🛡️ Universal Optimizer Pro
 
-Комплексный, безопасный и легковесный инструмент для оптимизации системы Windows. 
+A comprehensive, safe, and lightweight system optimization tool for Windows.
 
-Изначально проект представлял собой `.bat`-скрипт. Теперь он полностью переписан на **Python**, получил удобный интерфейс, защиту от сбоев и систему откатов, но при этом сохранил поддержку старых систем.
+Originally a simple `.bat` script, the project has been completely rewritten in **Python**. It now features a better user interface, error handling, and a safe rollback system, while still maintaining support for legacy systems.
 
-## 🚀 Как скачать и запустить
+## 🚀 How to Download and Run
 
-1. Перейдите в раздел **[Releases (Релизы)](../../releases)**.
-2. Скачайте нужный файл из последнего релиза (см. описание ниже).
-3. Запустите файл. **Программа сама запросит права администратора** (появится стандартное окно UAC — нажмите «Да»).
+1. Go to the **[Releases](../../releases)** section.
+2. Download the desired file from the latest release (see details below).
+3. Run the file. **The program will automatically request Administrator privileges** (a standard UAC prompt will appear — click "Yes").
 
-### 📦 Что скачивать?
+### 📦 What to Download?
 
-* **`Optimizer_Pro.exe`** *(Рекомендуется)* — Готовая программа для современных систем (Windows 10/11). **Вам не нужно устанавливать Python.** Просто скачайте и запустите.
-* **`Optimizer_Pro.bat`** — Классическая скриптовая версия. Идеально подходит для старых ПК (Windows 7/8) или если `.exe` не запускается.
-* **`Optimizer_Pro.py`** — Исходный код для разработчиков (требуется установленный Python 3.x).
-
----
-
-## ✨ Ключевые возможности
-
-* **Полная или выборочная оптимизация**: Вы сами выбираете, какие этапы выполнять (Y/N).
-* **Безопасный откат (Rollback)**: Если что-то пошло не так, выберите пункт «Откатить изменения» в меню. Программа вернет стандартные настройки служб, питания и GameDVR.
-* **Замер памяти (Бенчмарк)**: Программа замеряет свободную ОЗУ *до* и *после* оптимизации, показывая, сколько мегабайт удалось освободить.
-* **Умная очистка**: Безопасно удаляет временные файлы и кэш обновлений Windows, не убивая критически важные процессы.
-* **Проверка целостности**: Встроенный запуск `SFC /scannow` и `DISM /RestoreHealth`.
-* **Отключение телеметрии**: Блокировка шпионских служб Windows, NVIDIA и AMD, а также фоновой записи GameDVR.
+* **`Optimizer_Pro.exe`** *(Recommended)* — Ready-to-use application for modern systems (Windows 10/11). **You do NOT need to install Python.** Just download and run.
+* **`Optimizer_Pro.bat`** — Classic script version. Perfect for older PCs (Windows 7/8) or if the `.exe` doesn't launch for some reason.
+* **`Optimizer_Pro.py`** — Python source code for developers (requires Python 3.x installed).
 
 ---
 
-## ⚠️ Важная информация
+## ✨ Key Features
 
-> **Антивирус и Браузер:** 
-> Так как программа собрана с помощью PyInstaller и запрашивает права администратора для работы с реестром, **Windows Defender или ваш браузер могут ложно срабатывать** при скачивании `.exe` файла. Это нормально для подобных утилит. Нажмите «Подробнее» -> «Выполнить в любом случае» (Keep anyway).
-
-> **Точка восстановления:** 
-> Настоятельно рекомендуется в главном меню выбрать пункт **«1. Полная оптимизация»**, так как на первом этапе программа автоматически создаст точку восстановления системы на случай непредвиденных ситуаций.
-
-> **Перезагрузка:** 
-> После завершения работы рекомендуется перезагрузить компьютер, чтобы все изменения в реестре и службах применились окончательно.
+* **Full or Selective Optimization**: You choose which steps to execute (Y/N prompts).
+* **Safe Rollback**: If something goes wrong or you don't like the changes, select "Restore Defaults" in the menu. The program will revert services, power plans, and GameDVR settings to their original states.
+* **RAM Benchmark**: The program measures free RAM *before* and *after* optimization, showing you exactly how many megabytes were freed.
+* **Smart Cleaning**: Safely removes temporary files and Windows Update caches without force-closing critical background processes.
+* **Integrity Check**: Built-in execution of `SFC /scannow` and `DISM /RestoreHealth`.
+* **Privacy & Telemetry**: Disables tracking services for Windows, NVIDIA, and AMD, as well as background GameDVR recording.
 
 ---
 
-## 🛠️ Для разработчиков
+## ⚠️ Important Information
 
-Если вы хотите собрать `.exe` самостоятельно из исходного кода:
+> **Antivirus & Browser Warnings:** 
+> Because the program is compiled with PyInstaller and requests Admin rights to modify the registry, **Windows Defender or your browser might flag the `.exe` as a false positive**. This is common for system utilities. If prompted, click "More info" -> "Run anyway" (or "Keep anyway").
+
+> **System Restore Point:** 
+> It is highly recommended to select **"1. Full Optimization"** in the main menu, as the first step of the program automatically creates a Windows System Restore Point just in case.
+
+> **Reboot:** 
+> After the optimization is complete, a PC reboot is highly recommended so all registry and service changes can fully apply.
+
+---
+
+## 🛠️ For Developers
+
+If you want to build the `.exe` yourself from the source code:
 ```bash
 pip install pyinstaller
 pyinstaller --onefile --uac-admin --name Optimizer_Pro Optimizer_Pro.py
