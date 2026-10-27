@@ -1,67 +1,85 @@
-# Optimizer Pro 🚀 — v10.0.0 (Ultimate Edition)
+# ⚡ Optimizer Pro
 
-Optimizer Pro is an ultra-high-performance system tuning, privacy hardening, and hardware monitoring utility for Windows. Re-engineered from scratch in Native C++ (Win32 API & Microsoft Edge WebView2), this version completely eliminates heavy managed runtimes (like .NET or Electron) to deliver a near-zero memory footprint, instant execution speeds, and bulletproof system-level stability.
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%2F%2011-0078D7?style=flat-square&logo=windows)](https://github.com/ligqw/Optimizer_Pro)
+[![C++](https://img.shields.io/badge/Language-C%2B%2B20-00599C?style=flat-square&logo=c%2B%2B)](https://github.com/ligqw/Optimizer_Pro)
+[![Version](https://img.shields.io/badge/Version-v11.0.0-brightgreen?style=flat-square)](https://github.com/ligqw/Optimizer_Pro/releases)
 
----
+**Optimizer Pro** is a high-performance utility for fine-tuning, cleaning, and monitoring the Windows system.
 
-## ⚡ Core Architectural & Feature Upgrades
-
-### 🎮 1. Gaming UI Overhaul & Overclocking Suite (New in v10.0.0)
-* **Cyberpunk/Gaming Aesthetic:** Complete visual redesign featuring a dark neon theme, glowing accents (`Orbitron` & `Rajdhani` fonts), custom clip-path UI elements, and animated load charts. 
-* **Hidden MSI Afterburner Launch:** A dedicated Overclocking tab allows you to apply GPU overclocks completely hidden. The backend silently launches MSI Afterburner with `/Profile1 /StartMinimized`, applying your saved profile without popping up any windows.
-* **CPU & RAM Boost:** Includes native toggles for `Win32PrioritySeparation` (maximizing CPU priority for games) and Windows Memory Compression management.
-* **Pagefile BSOD Protection:** A smart safety mechanism for the "Disable Paging" feature. If the system detects less than 32 GB of RAM, the operation is blocked with a warning to prevent system crashes (BSOD).
-* **Fully Closable Donation Modal:** The YooMoney donation widget now features a fixed close button, a bottom "Close" button, and supports `Esc` or background-click dismissal, preventing UI traps.
-
-### 🛡️ 2. Bulletproof Stability & Thread Safety (New in v10.0.0)
-* **WMI Memory Leak Fix:** Added explicit `obj.Reset()` calls before `en->Next()` across all WMI queries (`GetDiskHealthJson`, thermal zones). Long monitoring sessions will no longer accumulate memory.
-* **Fixed UI Freeze on Exit:** The main monitor thread (handling WMI and hardware polling) is now safely joined and terminated, ensuring the application closes instantly without hanging in the background.
-* **`DisableNagle` Infinite Loop Fixed:** The registry enumeration loop now correctly exits on `ERROR_NO_MORE_ITEMS`, preventing the app from freezing when applying low-latency network tweaks.
-* **Safe File Traversal:** Wrapped `fs::recursive_directory_iterator` in `try-catch` blocks. Scanning large drives or restricted system folders will no longer result in application crashes.
-
-### 📊 3. Thread-Safe Telemetry & Self-Resource Tracking
-* **Asynchronous Telemetry:** Spawns a dedicated background thread (`MonitorThread`) to pull live system diagnostics without blocking user interaction or causing interface micro-stutters.
-* **Sub-Second Accuracy:** Tracks total hardware utilization (CPU and GPU) with sub-second accuracy using native Windows PDH Performance Counters.
-* **Self-Usage Metrics:** Features transparent self-resource tracking. The dashboard natively tracks and displays the app's own lightweight consumption metrics (`App CPU %`, `App RAM MB`, `App GPU %`).
-* **Thermal Diagnostics:** Monitors structural thermals via granular WMI ACPI queries (`MSAcpi_ThermalZoneTemperature`).
-
-### 📦 4. Lite Windows Debloating & Winget Integration (Restored)
-* **Lite Windows Debloat:** Fully restored. Includes a powerful, aggressive debloating engine designed to strip down standard Windows into an ultra-lightweight workspace (similar to Tiny11). It permanently removes UWP bloatware (Bing Weather, Xbox, Zune, People, etc.), kills tracking pipelines, and disables background indexing (`WSearch`).
-* **Winget App Manager:** Implements a single-click package installation suite. Deploy popular tools, web browsers, messaging clients, and gaming hubs (Chrome, Discord, 7-Zip, Steam, MSI Afterburner) directly from official Microsoft Winget repositories.
-* **Runtime Libraries:** Quick-install buttons for essential Windows libraries including VC++ Redistributables, .NET Runtime, and Java.
-
-### 🧹 5. Advanced Maintenance & File Shredding
-* **Deep Cache Purge:** Dynamically wipes hidden cache structures, including DirectX Shader databases (`D3DSCache`), NVIDIA pipelines (`DXCache`), Windows Prefetch, Delivery Optimization cache, and system thumbnail caches.
-* **Secure Shredding:** Implements a high-security `ShredFile` module that overwrites destination sectors with randomized data streams before dropping the file descriptor.
-* **Benchmarking Suite:** Features integrated drive write/read benchmarking, automated network download bandwidth calculation via Cloudflare, file-hash duplicate identifiers, and broken uninstall registry scanners.
-
-### 🎨 6. Next-Gen Front-End & Fluid UI Core
-* **Full Localization:** Built-in multilingual support with seamless runtime language switching between **Russian** and **English** via the Settings tab.
-* **UI Responsiveness:** Refactored communication bridges using robust JavaScript `.finally()` promise chains. The UI is guaranteed to clear its `busy-state` and return to "Ready" even if background routines encounter unexpected exceptions or timeouts.
-* **Flexible Styling:** Ships with flexible themes (Dark, Light) combined with a workspace-saving Compact Mode toggle.
-* **JSON Policy Serialization:** Embeds custom JSON serialization protocols allowing users to easily export or import optimization policies across multiple machines.
+Written in native **C++ (Win32 API + WebView2)**, the program does not require heavy runtime environments (such as .NET or Electron). This ensures minimal RAM consumption, instant UI response, and deep access to system functions.
 
 ---
 
-## 🛠 Compilation & Build Requirements
+## ✨ Key Features (v11.0.0)
 
-To compile the native binary from source, ensure your development workspace meets the following specifications:
+### 🧠 Smart Optimization
+* **Automatic PC Analysis**: Scans the system and generates a list of safe (or reversible) improvements, indicating the category, potential space savings, and risk level.
+* **Flexible Application**: You choose which items to apply (cache cleaning, memory optimization, enabling Game Mode, etc.).
 
-* **Operating System:** Windows 10 / 11 (X64 architecture required).
-* **Compiler / Toolset:** MSVC v143 or higher (Visual Studio 2022 or newer) supporting C++17/C++20 standards.
-* **Windows SDK:** Windows SDK `10.0.22621.0` or newer.
-* **Dependencies:** Microsoft.Web.WebView2 SDK package.
-* **Privileges:** **Administrator privileges are strictly required** to run or debug the application since it interacts with system services (`sc config`), task schedulers (`schtasks`), registers, system power schemes (`powercfg`), and executes deep package management configurations.
+### 🚀 Performance & Gaming
+* **Game Booster**: Instantly stops background services (SysMain, WSearch, DiagTrack) to boost FPS.
+* **Game Mode & FSO**: Enables Windows Game Mode and disables Fullscreen Optimizations.
+* **Hidden Overclock**: Launches MSI Afterburner in the background, applying your saved profile (without opening windows).
+* **Game Compression (LZX)**: Transparent compression of game folders via `compact.exe` to save SSD space.
+* **Registry Tweaks**: Configures `Win32PrioritySeparation`, disables Network Throttling, and the Nagle algorithm to reduce ping.
 
-### 🔒 Static Linking Note
-The application links statically against essential Win32 subsystem libraries. Ensure your compiler linker settings include the following workspace directives:
+### 🧹 Deep Cleaning & Memory
+* **Enhanced Cache (ISLC-class)**: Cleans Temp, Prefetch, browser caches, launchers, Delivery Optimization, Windows Update cache, shader cache, and thumbnails.
+* **Enhanced RAM (Mem Reduct-class)**: Clears the Standby list, flushes the modified page list, and trims process Working Sets. Adjustable aggressiveness.
 
-```cpp
-#pragma comment(lib, "ws2_32.lib")
-#pragma comment(lib, "iphlpapi.lib")
-#pragma comment(lib, "userenv.lib")
-#pragma comment(lib, "dwmapi.lib")
-#pragma comment(lib, "pdh.lib")
-#pragma comment(lib, "wbemuuid.lib")
-#pragma comment(lib, "winhttp.lib")
-#pragma comment(lib, "WebView2LoaderStatic.lib")
+### 🛠️ Advanced System Tools
+* **Startup Manager**: Manage entries from the registry (HKCU and HKLM).
+* **Service Manager**: Start, stop, and change the startup type (Auto, Manual, Disabled) for any service.
+* **Context Menu Manager**: Enable the classic Windows 11 menu or the modern one, and disable third-party Shell Extensions.
+* **Hosts Editor**: Built-in editor with automatic backup creation and integrity verification.
+* **File Tools**: Large file finder, duplicate finder (by hash and size), and a secure 3-pass file shredder.
+
+### 🎨 UI & Customization
+* **12 Dynamic Themes**: From classic Black/White/Midnight to animated themes (Void, Ocean, Neon, Forest, Crimson, etc.).
+* **In-Game Overlay**: Displays CPU, GPU, RAM, and temperature on top of games. Custom positioning (X/Y) and transparency settings.
+* **Multi-language**: Full support for Russian and English.
+
+---
+
+## 🛡️ Safety & Protection
+* **BSOD Protection**: When attempting to disable the pagefile (Disable Paging), the program checks your RAM size. If you have less than 32 GB, the operation is blocked.
+* **Drive Protection**: When a non-system drive is selected (in settings), dangerous features (Lite Windows, Services, Registry tweaks) are automatically hidden.
+* **Asynchronous Operations**: All heavy operations run in background threads, preventing the UI from freezing.
+
+---
+
+## 🚀 Installation & Running
+
+1. Go to the [Releases](https://github.com/ligqw/Optimizer_Pro/releases) section.
+2. Download the latest `Optimizer_pro.exe` file.
+3. Run as **Administrator** (required for access to services, registry, and WMI).
+
+*(If Edge WebView2 Runtime is not installed on your system, the program will automatically offer to download and install it on the first launch).*
+
+### Command Line Arguments (CLI)
+* `--no-admin` : Run without administrator privileges (limited functionality).
+* `--silent` : Start minimized to the system tray.
+* `--help` : Show help for arguments.
+
+---
+
+## 💻 Building from Source
+
+To build the project, you will need:
+* **Visual Studio 2022** (with Desktop development with C++).
+* **Windows SDK** (10.0.22621.0 or newer).
+* **WebView2 SDK** (Microsoft.Web.WebView2).
+* **C++20** (or C++17).
+
+1. Clone the repository.
+2. Open the `.sln` solution file in Visual Studio.
+3. Ensure that the linker settings include `WebView2LoaderStatic.lib` and other libraries listed in the `#pragma comment`.
+4. Build the project in `Release` / `x64` configuration.
+
+---
+
+## ⚠️ Disclaimer
+The program makes changes to the registry, system services, and files. Although all actions are accompanied by warnings and are (mostly) reversible, the author is not responsible for any system instability, data loss, or other consequences. **Use at your own risk.** Before applying aggressive tweaks (Lite Windows, disabling services), it is highly recommended to create a system restore point.
+
+---
+*Made with ❤️ for the gaming and enthusiast community.*
