@@ -1,16 +1,16 @@
-# ⚡ Optimizer Pro
+# ⚡ ZeroBloat
 
-[![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%2F%2011-0078D7?style=flat-square&logo=windows)](https://github.com/ligqw/Optimizer_Pro)
-[![C++](https://img.shields.io/badge/Language-C%2B%2B20-00599C?style=flat-square&logo=c%2B%2B)](https://github.com/ligqw/Optimizer_Pro)
-[![Version](https://img.shields.io/badge/Version-v11.0.0-brightgreen?style=flat-square)](https://github.com/ligqw/Optimizer_Pro/releases)
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%2F%2011-0078D7?style=flat-square&logo=windows)](https://github.com/ligqw/ZeroBloat)
+[![C++](https://img.shields.io/badge/Language-C%2B%2B20-00599C?style=flat-square&logo=c%2B%2B)](https://github.com/ligqw/ZeroBloat)
+[![Version](https://img.shields.io/badge/Version-v11.0.0-brightgreen?style=flat-square)](https://github.com/ligqw/ZeroBloat/releases)
 
-**Optimizer Pro** is a high-performance utility for fine-tuning, cleaning, and monitoring the Windows system.
+**ZeroBloat** is a high-performance utility for fine-tuning, cleaning, and monitoring the Windows system.
 
 Written in native **C++ (Win32 API + WebView2)**, the program does not require heavy runtime environments (such as .NET or Electron). This ensures minimal RAM consumption, instant UI response, and deep access to system functions.
 
 ---
 
-## ✨ Key Features (v11.0.0)
+## ✨ Key Features (v12.0.0)
 
 ### 🧠 Smart Optimization
 * **Automatic PC Analysis**: Scans the system and generates a list of safe (or reversible) improvements, indicating the category, potential space savings, and risk level.
@@ -42,6 +42,7 @@ Written in native **C++ (Win32 API + WebView2)**, the program does not require h
 ---
 
 ## 🛡️ Safety & Protection
+
 * **BSOD Protection**: When attempting to disable the pagefile (Disable Paging), the program checks your RAM size. If you have less than 32 GB, the operation is blocked.
 * **Drive Protection**: When a non-system drive is selected (in settings), dangerous features (Lite Windows, Services, Registry tweaks) are automatically hidden.
 * **Asynchronous Operations**: All heavy operations run in background threads, preventing the UI from freezing.
@@ -50,8 +51,8 @@ Written in native **C++ (Win32 API + WebView2)**, the program does not require h
 
 ## 🚀 Installation & Running
 
-1. Go to the [Releases](https://github.com/ligqw/Optimizer_Pro/releases) section.
-2. Download the latest `Optimizer_pro.exe` file.
+1. Go to the [Releases](https://github.com/ligqw/ZeroBloat/releases) section.
+2. Download the latest `ZeroBloat.exe` file.
 3. Run as **Administrator** (required for access to services, registry, and WMI).
 
 *(If Edge WebView2 Runtime is not installed on your system, the program will automatically offer to download and install it on the first launch).*
@@ -79,6 +80,7 @@ To build the project, you will need:
 ---
 
 ## ⚠️ Disclaimer
+
 The program makes changes to the registry, system services, and files. Although all actions are accompanied by warnings and are (mostly) reversible, the author is not responsible for any system instability, data loss, or other consequences. **Use at your own risk.** Before applying aggressive tweaks (Lite Windows, disabling services), it is highly recommended to create a system restore point.
 
 ---
