@@ -2,7 +2,7 @@
 
 [![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%2F%2011-0078D7?style=flat-square&logo=windows)](https://github.com/ligqw/ZeroBloat)
 [![C++](https://img.shields.io/badge/Language-C%2B%2B20-00599C?style=flat-square&logo=c%2B%2B)](https://github.com/ligqw/ZeroBloat)
-[![Version](https://img.shields.io/badge/Version-v11.0.0-brightgreen?style=flat-square)](https://github.com/ligqw/ZeroBloat/releases)
+[![Version](https://img.shields.io/badge/Version-v12.0.0-brightgreen?style=flat-square)](https://github.com/ligqw/ZeroBloat/releases)
 
 **ZeroBloat** is a high-performance utility for fine-tuning, cleaning, and monitoring the Windows system.
 
