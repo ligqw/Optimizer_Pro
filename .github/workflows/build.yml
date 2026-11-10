@@ -22,7 +22,27 @@ jobs:
 
     - name: Compile ZeroBloat.cpp
       run: |
-        cl.exe /O2 /std:c++17 /EHsc ZeroBloat.cpp /I packages\Microsoft.Web.WebView2.1.0.2849.39\build\native\include /link /SUBSYSTEM:WINDOWS ws2_32.lib iphlpapi.lib winhttp.lib wbemuuid.lib ole32.lib oleaut32.lib pdh.lib psapi.lib advapi32.lib crypt32.lib userenv.lib shell32.lib shlwapi.lib shellapi.lib dwmapi.lib user32.lib gdi32.lib packages\Microsoft.Web.WebView2.1.0.2849.39\build\native\x64\WebView2Loader.dll.lib /OUT:ZeroBloat.exe
+        cl.exe /O2 /std:c++17 /EHsc ZeroBloat.cpp `
+          /I packages\Microsoft.Web.WebView2.1.0.2849.39\build\native\include `
+          /link /SUBSYSTEM:WINDOWS `
+          ws2_32.lib `
+          iphlpapi.lib `
+          winhttp.lib `
+          wbemuuid.lib `
+          ole32.lib `
+          oleaut32.lib `
+          pdh.lib `
+          psapi.lib `
+          advapi32.lib `
+          crypt32.lib `
+          userenv.lib `
+          shell32.lib `
+          shlwapi.lib `
+          dwmapi.lib `
+          user32.lib `
+          gdi32.lib `
+          packages\Microsoft.Web.WebView2.1.0.2849.39\build\native\x64\WebView2Loader.dll.lib `
+          /OUT:ZeroBloat.exe
 
     - name: Upload Compiled Executable
       uses: actions/upload-artifact@v4
