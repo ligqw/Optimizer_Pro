@@ -22,7 +22,7 @@ jobs:
 
     - name: Compile ZeroBloat.cpp
       run: |
-        cl.exe /O2 /std:c++17 /EHsc ZeroBloat.cpp `
+        cl.exe /O2 /std:c++17 /EHsc /D _WRL_NO_DEFAULT_LIB_ ZeroBloat.cpp `
           /I packages\Microsoft.Web.WebView2.1.0.2849.39\build\native\include `
           /link /SUBSYSTEM:WINDOWS `
           ws2_32.lib `
