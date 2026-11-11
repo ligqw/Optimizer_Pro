@@ -16,18 +16,33 @@ jobs:
 
     - name: Setup MSVC Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: x64
 
     - name: Download WebView2 SDK via NuGet
+      shell: powershell
       run: |
         nuget install Microsoft.Web.WebView2 -Version 1.0.2849.39 -OutputDirectory packages
+        Get-ChildItem packages -Recurse -Filter "*.lib" | Select-Object FullName
 
     - name: Compile ZeroBloat.cpp
       shell: powershell
       run: |
-        # Автоматически находим точный путь к инклудам WebView2, чтобы избежать ошибок в путях
-        $wv2_include = (Get-Item packages\Microsoft.Web.WebView2.*\build\native\include).FullName
-        
-        cl.exe /O2 /std:c++17 /EHsc /D WV2_USE_STATIC_LOADER=0 ZeroBloat.cpp /I "$wv2_include" /link /SUBSYSTEM:WINDOWS ws2_32.lib iphlpapi.lib winhttp.lib wbemuuid.lib ole32.lib oleaut32.lib pdh.lib psapi.lib advapi32.lib crypt32.lib userenv.lib shell32.lib shlwapi.lib dwmapi.lib user32.lib gdi32.lib /OUT:ZeroBloat.exe
+        $pkg = (Get-ChildItem packages -Directory -Filter "Microsoft.Web.WebView2.*" | Select-Object -First 1).FullName
+        $wv2_include = Join-Path $pkg "build\native\include"
+        $wv2_lib = Join-Path $pkg "build\native\x64"
+
+        Write-Host "Include: $wv2_include"
+        Write-Host "Lib: $wv2_lib"
+
+        if (-not (Test-Path (Join-Path $wv2_lib "WebView2LoaderStatic.lib"))) {
+          Write-Error "WebView2LoaderStatic.lib not found in $wv2_lib"
+          exit 1
+        }
+
+        cl.exe /O2 /MT /std:c++17 /EHsc ZeroBloat.cpp /I "$wv2_include" /link /LIBPATH:"$wv2_lib" /SUBSYSTEM:WINDOWS WebView2LoaderStatic.lib ws2_32.lib iphlpapi.lib winhttp.lib wbemuuid.lib ole32.lib oleaut32.lib pdh.lib psapi.lib advapi32.lib crypt32.lib userenv.lib shell32.lib shlwapi.lib dwmapi.lib user32.lib gdi32.lib /OUT:ZeroBloat.exe
+
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
     - name: Upload Compiled Executable
       uses: actions/upload-artifact@v4
