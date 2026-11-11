@@ -23,7 +23,6 @@ jobs:
       shell: powershell
       run: |
         nuget install Microsoft.Web.WebView2 -Version 1.0.2849.39 -OutputDirectory packages
-        Get-ChildItem packages -Recurse -Filter "*.lib" | Select-Object FullName
 
     - name: Compile ZeroBloat.cpp
       shell: powershell
@@ -40,7 +39,7 @@ jobs:
           exit 1
         }
 
-        cl.exe /O2 /MT /std:c++17 /EHsc ZeroBloat.cpp /I "$wv2_include" /link /LIBPATH:"$wv2_lib" /SUBSYSTEM:WINDOWS WebView2LoaderStatic.lib ws2_32.lib iphlpapi.lib winhttp.lib wbemuuid.lib ole32.lib oleaut32.lib pdh.lib psapi.lib advapi32.lib crypt32.lib userenv.lib shell32.lib shlwapi.lib dwmapi.lib user32.lib gdi32.lib /OUT:ZeroBloat.exe
+        cl.exe /O2 /MT /utf-8 /std:c++17 /EHsc /DUNICODE /D_UNICODE ZeroBloat.cpp /I "$wv2_include" /link /LIBPATH:"$wv2_lib" /SUBSYSTEM:WINDOWS WebView2LoaderStatic.lib ws2_32.lib iphlpapi.lib winhttp.lib wbemuuid.lib ole32.lib oleaut32.lib pdh.lib psapi.lib advapi32.lib crypt32.lib userenv.lib shell32.lib shlwapi.lib dwmapi.lib user32.lib gdi32.lib /OUT:ZeroBloat.exe
 
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
